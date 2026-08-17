@@ -14,6 +14,10 @@ public class PlayerKeyboardMove : MonoBehaviour
     bool jumpPressed;
     bool isGrounded;
 
+    // [2단 점프 추가]
+    // 현재 몇 번 점프했는지 저장합니다.
+    int jumpCount = 0;
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
@@ -32,12 +36,12 @@ public class PlayerKeyboardMove : MonoBehaviour
         {
             xDirection = 1.0f;
         }
-        else if(leftInput == true && rightInput == false)
+        else if (leftInput == true && rightInput == false)
         {
             xDirection = -1.0f;
         }
 
-        if(Input.GetKeyDown(KeyCode.Space) == true)
+        if (Input.GetKeyDown(KeyCode.Space) == true)
         {
             jumpPressed = true;
         }
@@ -45,14 +49,37 @@ public class PlayerKeyboardMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        isGrounded = Physics2D.OverlapCircle(
+            groundCheck.position,
+            groundCheckRadius,
+            groundLayer
+        );
 
         float xSpeed = xDirection * moveSpeed;
         body.linearVelocity = new Vector2(xSpeed, body.linearVelocity.y);
 
-        if(jumpPressed == true && isGrounded == true)
+        // [2단 점프 추가]
+        // 플레이어가 바닥에 내려오면 점프 횟수를 다시 0으로 만듭니다.
+        // y 방향 속도가 0 이하일 때만 초기화해서
+        // 첫 번째 점프 직후 다시 초기화되는 것을 방지합니다.
+        if (isGrounded == true && body.linearVelocity.y <= 0.0f)
         {
-            body.linearVelocity = new Vector2(body.linearVelocity.x, jumpPower);
+            jumpCount = 0;
+        }
+
+        // [2단 점프 수정]
+        // 바닥에 있는지를 검사하는 대신
+        // 지금까지 점프한 횟수가 2번보다 적은지를 확인합니다.
+        if (jumpPressed == true && jumpCount < 2)
+        {
+            body.linearVelocity = new Vector2(
+                body.linearVelocity.x,
+                jumpPower
+            );
+
+            // [2단 점프 추가]
+            // 점프할 때마다 점프 횟수를 1 증가시킵니다.
+            jumpCount++;
         }
 
         jumpPressed = false;
@@ -61,6 +88,9 @@ public class PlayerKeyboardMove : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        Gizmos.DrawWireSphere(
+            groundCheck.position,
+            groundCheckRadius
+        );
     }
 }
