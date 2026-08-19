@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class CourseReactionController : MonoBehaviour
 {
-    public Transform startPoint;
     public GameObject clearSign;
 
     private bool isClear = false;
@@ -14,24 +13,6 @@ public class CourseReactionController : MonoBehaviour
     {
         // 오브젝트를 비활성화 처리.
         clearSign.SetActive(false);
-    }
-
-    /// <summary>
-    /// 오브젝트가 Collision 방식으로 충돌했을 때 자동으로 호출되는 함수.
-    /// </summary>
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(isClear == true)
-        {
-            return;
-        }
-
-        // 충돌한 대상의 Tag 확인.
-        if(collision.gameObject.CompareTag("Hazard") == true)
-        {
-            // 시작 위치로 되돌리는 처리.
-            MoveToStartPoint();
-        }
     }
 
     /// <summary>
@@ -55,11 +36,6 @@ public class CourseReactionController : MonoBehaviour
             // 클리어 처리.
             ClearStage();
         }
-    }
-
-    void MoveToStartPoint()
-    {
-        transform.position = startPoint.position;
     }
 
     void CollectCoin(GameObject coinObject)
