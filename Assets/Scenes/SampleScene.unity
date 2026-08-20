@@ -807,6 +807,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -932,6 +933,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c332153e522a46438fe77a53db273f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 710018161}
+  offset: {x: 0, y: 0, z: -10}
+  followSpeed: 5
+  shakeTime: 0.5
+  strength: 0.15
 --- !u!1 &564674656
 GameObject:
   m_ObjectHideFlags: 0
@@ -1375,7 +1393,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -1428,7 +1446,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ce5377ae24864241abcdd384e05005c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPoint: {fileID: 1668738403}
   clearSign: {fileID: 674547095}
 --- !u!114 &710018165
 MonoBehaviour:
@@ -1449,6 +1466,7 @@ MonoBehaviour:
   heart3: {fileID: 71158466}
   gameOverPanel: {fileID: 2135744364}
   playerMoveScript: {fileID: 710018159}
+  cameraFollow: {fileID: 519420033}
 --- !u!1 &795678757
 GameObject:
   m_ObjectHideFlags: 0

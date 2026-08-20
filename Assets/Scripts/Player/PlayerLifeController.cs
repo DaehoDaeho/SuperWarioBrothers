@@ -11,6 +11,7 @@ public class PlayerLifeController : MonoBehaviour
 
     public GameObject gameOverPanel;
     public PlayerKeyboardMove playerMoveScript;
+    public CameraFollow cameraFollow;
 
     int currentLives;
 
@@ -34,6 +35,12 @@ public class PlayerLifeController : MonoBehaviour
         {
             // 데미지 처리.
             TakeDamage();
+
+            // 위험물 오브젝트에 닿아서 데미지를 입은 후 카메라 흔들림 시작을 요청.
+            if(cameraFollow != null)
+            {
+                cameraFollow.StartShake();
+            }
         }
     }
 
