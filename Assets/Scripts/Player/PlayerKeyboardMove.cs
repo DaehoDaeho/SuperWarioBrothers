@@ -7,12 +7,16 @@ public class PlayerKeyboardMove : MonoBehaviour
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;
+    public Animator animator;
+    public SpriteRenderer spriteRenderer;
 
     Rigidbody2D body;
     float xDirection;
 
     bool jumpPressed;
     bool isGrounded;
+    float xSpeed = 0.0f;
+    float lastMoveDirection = 1.0f;
 
     // [2단 점프 추가]
     // 현재 몇 번 점프했는지 저장합니다.
@@ -35,16 +39,21 @@ public class PlayerKeyboardMove : MonoBehaviour
         if (rightInput == true && leftInput == false)
         {
             xDirection = 1.0f;
+            lastMoveDirection = xDirection;
         }
         else if (leftInput == true && rightInput == false)
         {
             xDirection = -1.0f;
+            lastMoveDirection = xDirection;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) == true)
         {
             jumpPressed = true;
         }
+
+        UpdateDirection();
+        UpdateAnimation();
     }
 
     void FixedUpdate()
@@ -55,7 +64,7 @@ public class PlayerKeyboardMove : MonoBehaviour
             groundLayer
         );
 
-        float xSpeed = xDirection * moveSpeed;
+        xSpeed = xDirection * moveSpeed;
         body.linearVelocity = new Vector2(xSpeed, body.linearVelocity.y);
 
         // [2단 점프 추가]
@@ -83,6 +92,25 @@ public class PlayerKeyboardMove : MonoBehaviour
         }
 
         jumpPressed = false;
+    }
+
+    void UpdateAnimation()
+    {
+        bool isMoving = xSpeed != 0.0f;
+        animator.SetBool("IsMoving", isMoving);
+        animator.SetBool("IsGrounded", isGrounded);
+    }
+
+    void UpdateDirection()
+    {
+        if(lastMoveDirection > 0.0f)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else if(lastMoveDirection < 0.0f)
+        {
+            spriteRenderer.flipX = true;
+        }
     }
 
     private void OnDrawGizmos()

@@ -1300,6 +1300,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  animator: {fileID: 710018166}
+  spriteRenderer: {fileID: 710018160}
 --- !u!212 &710018160
 SpriteRenderer:
   m_ObjectHideFlags: 0
