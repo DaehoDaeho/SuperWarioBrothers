@@ -1507,7 +1507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPoint: {fileID: 735564654}
-  attackOffset: {x: 0.8, y: 0}
+  attackOffset: {x: 1.2, y: 0}
   attackRange: 0.5
   enemyLayer:
     serializedVersion: 2
@@ -1515,6 +1515,7 @@ MonoBehaviour:
   attackCooldown: 0.35
   spriteRenderer: {fileID: 710018160}
   animator: {fileID: 710018166}
+  attackDamage: 1
 --- !u!1 &735564653
 GameObject:
   m_ObjectHideFlags: 0
@@ -1750,6 +1751,7 @@ GameObject:
   - component: {fileID: 1361028825}
   - component: {fileID: 1361028824}
   - component: {fileID: 1361028829}
+  - component: {fileID: 1361028830}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -1775,6 +1777,8 @@ MonoBehaviour:
   spriteRenderer: {fileID: 1361028827}
   animator: {fileID: 1361028829}
   idleTime: 2
+  enemyHealth: {fileID: 1361028830}
+  hitTime: 1
 --- !u!70 &1361028825
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1931,6 +1935,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1361028830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361028823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ba32ddabf89af24ab3a91a7cdb5598e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+  animator: {fileID: 1361028829}
 --- !u!1 &1495262620
 GameObject:
   m_ObjectHideFlags: 0

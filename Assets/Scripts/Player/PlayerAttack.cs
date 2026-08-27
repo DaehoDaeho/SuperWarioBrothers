@@ -9,6 +9,7 @@ public class PlayerAttack : MonoBehaviour
     public float attackCooldown = 0.35f;
     public SpriteRenderer spriteRenderer;
     public Animator animator;
+    public int attackDamage = 1;
 
     private float lastAttackTime = 0.0f;
 
@@ -61,6 +62,13 @@ public class PlayerAttack : MonoBehaviour
         for (int i = 0; i < hitEnemies.Length; i++)
         {
             Debug.Log("공격 범위 안의 적: " + hitEnemies[i].name);
+
+            EnemyHealth enemyHealth = hitEnemies[i].GetComponent<EnemyHealth>();
+            if(enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(attackDamage);
+            }
+
             EnemyPatrol enemyPatrol = hitEnemies[i].GetComponent<EnemyPatrol>();
             if(enemyPatrol != null)
             {

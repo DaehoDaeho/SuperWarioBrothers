@@ -9,6 +9,8 @@ public class EnemyPatrol : MonoBehaviour
     public Animator animator;
 
     public float idleTime = 2.0f;
+
+    public EnemyHealth enemyHealth;
     
     private Vector2 startPosition;
 
@@ -50,6 +52,13 @@ public class EnemyPatrol : MonoBehaviour
 
     private void Move()
     {
+        if(enemyHealth.IsDead == true)
+        {
+            body.linearVelocity = new Vector3(0.0f, body.linearVelocity.y);
+
+            return;
+        }
+
         if(isMoving == false)
         {
             return;
@@ -67,7 +76,12 @@ public class EnemyPatrol : MonoBehaviour
 
     void CheckTurnPoint()
     {
-        if(isMoving == false)
+        if (enemyHealth.IsDead == true)
+        {
+            return;
+        }
+
+        if (isMoving == false)
         {
             return;
         }
@@ -100,7 +114,12 @@ public class EnemyPatrol : MonoBehaviour
 
     void UpdateFacingDirection()
     {
-        if(isMoving == false)
+        if (enemyHealth.IsDead == true)
+        {
+            return;
+        }
+
+        if (isMoving == false)
         {
             return;
         }
@@ -115,6 +134,11 @@ public class EnemyPatrol : MonoBehaviour
 
     void Idle()
     {
+        if (enemyHealth.IsDead == true)
+        {
+            return;
+        }
+
         if (isMoving == false)
         {
             idleTimer += Time.deltaTime;
@@ -145,6 +169,11 @@ public class EnemyPatrol : MonoBehaviour
 
     public void StartHit()
     {
+        if(enemyHealth.IsDead == true)
+        {
+            return;
+        }
+
         isHit = true;
         hitTimer = 0.0f;
         if(body.linearVelocity.x != 0.0f)
