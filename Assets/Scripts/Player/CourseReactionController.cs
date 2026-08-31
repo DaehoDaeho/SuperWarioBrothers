@@ -34,7 +34,7 @@ public class CourseReactionController : MonoBehaviour
         else if(other.CompareTag("Goal") == true)
         {
             // 클리어 처리.
-            ClearStage();
+            GameManager.Instance.GameClear();
         }
     }
 

@@ -30,6 +30,11 @@ public class PlayerKeyboardMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.Instance.IsPlaying() == false)
+        {
+            return;
+        }
+
         bool rightInput = Input.GetKey(KeyCode.RightArrow) == true || Input.GetKey(KeyCode.D) == true;
 
         bool leftInput = Input.GetKey(KeyCode.LeftArrow) == true || Input.GetKey(KeyCode.A) == true;
@@ -58,6 +63,12 @@ public class PlayerKeyboardMove : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (GameManager.Instance.IsPlaying() == false)
+        {
+            body.linearVelocity = new Vector2(0.0f, body.linearVelocity.y);
+            return;
+        }
+
         isGrounded = Physics2D.OverlapCircle(
             groundCheck.position,
             groundCheckRadius,

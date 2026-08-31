@@ -31,11 +31,21 @@ public class EnemyPatrol : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.IsPlaying() == false)
+        {
+            return;
+        }
+
         UpdateAnimation();
     }
 
     private void FixedUpdate()
     {
+        if (GameManager.Instance.IsPlaying() == false)
+        {
+            return;
+        }
+
         // 순찰 범위 끝에 도달했는지 확인.
         CheckTurnPoint();
 

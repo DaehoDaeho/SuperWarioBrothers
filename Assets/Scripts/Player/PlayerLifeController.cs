@@ -9,7 +9,6 @@ public class PlayerLifeController : MonoBehaviour
     public GameObject heart2;
     public GameObject heart3;
 
-    public GameObject gameOverPanel;
     public PlayerKeyboardMove playerMoveScript;
     public CameraFollow cameraFollow;
 
@@ -20,7 +19,6 @@ public class PlayerLifeController : MonoBehaviour
     {
         currentLives = maxLives;
         UpdateHeartUI();
-        gameOverPanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -52,9 +50,8 @@ public class PlayerLifeController : MonoBehaviour
 
         if(currentLives <= 0)
         {
-            gameOverPanel.SetActive(true);
+            GameManager.Instance.GameOver();
             playerMoveScript.enabled = false;
-            MoveToStartPoint();
         }
     }
 
