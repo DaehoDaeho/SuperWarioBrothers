@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 1.0f;
+
         currentState = GameState.Playing;
 
         // Instance에 이미 객체가 등록되어 있다면, 중복 등록을 하지 않는 처리.
@@ -70,6 +72,7 @@ public class GameManager : MonoBehaviour
 
         currentState = GameState.Clear;
         clearPanel.SetActive(true);
+        Time.timeScale = 0.0f;
     }
 
     public void AddCoinCount(int count)
