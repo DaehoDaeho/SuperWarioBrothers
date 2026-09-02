@@ -7,6 +7,9 @@ public class EnemyHealth : MonoBehaviour
 
     private int currentHealth;
     private bool isDead;
+
+    public GameObject coinPrefab;
+
     public bool IsDead
     {
         get { return isDead; }
@@ -45,12 +48,15 @@ public class EnemyHealth : MonoBehaviour
         isDead = true;        
 
         animator.SetTrigger("Death");
-        Destroy(gameObject, 1.5f);
-        //Invoke("DestroyObject", 1.5f);
+        //Destroy(gameObject, 1.5f);
+        Invoke("DestroyObject", 1.5f);
     }
 
     void DestroyObject()
     {
+        // 씬에 게임 오브젝트를 생성하는 함수.
+        Instantiate(coinPrefab, transform.position, Quaternion.identity);
+
         Destroy(gameObject);
     }
 }

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public enum GameState
@@ -16,6 +17,10 @@ public class GameManager : MonoBehaviour
 
     public GameObject gameOverPanel;
     public GameObject clearPanel;
+
+    public TMP_Text coinCountText;
+
+    private int coinCount;
 
     private void Awake()
     {
@@ -36,12 +41,7 @@ public class GameManager : MonoBehaviour
     {
         gameOverPanel.SetActive(false);
         clearPanel.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        UpdateCoinCountUI();
     }
 
     public bool IsPlaying()
@@ -70,5 +70,16 @@ public class GameManager : MonoBehaviour
 
         currentState = GameState.Clear;
         clearPanel.SetActive(true);
+    }
+
+    public void AddCoinCount(int count)
+    {
+        coinCount += count;
+        UpdateCoinCountUI();
+    }
+
+    void UpdateCoinCountUI()
+    {
+        coinCountText.text = "Coin: " + coinCount;
     }
 }
